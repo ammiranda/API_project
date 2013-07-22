@@ -14,11 +14,12 @@ $(document).ready(function() {
 }
  	var prime_list = getPrimes(1240);
  	console.log(prime_list);
- 	var moo = $.getJSON("http://xkcd.com/info.0.json/callback=?");
- 	console.log(moo);
+ 	//var moo = $.getJSON("http://xkcd.com/info.0.json/callback=?");
+ 	//console.log(moo);
  	
- 	/*$.ajax({
- 		url: "http://xkcd.com/info." + prime_list + ".json/",
+ 	$.ajax({
+ 		url: "http://dynamic.xkcd.com/api-0/jsonp/comic/" + prime_list[10],
  		dataType: 'jsonp',
- 		success: function(*/
- 	});
+ 		success: function(data, textStatus, jqXHR) {
+ 			console.log(data);
+ 	}})});
