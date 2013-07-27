@@ -56,17 +56,16 @@ h1 {
 	}
 h1, p {
 	margin: auto auto;
-	text-align: center
+	text-align: center;
 	}
 a, a:visited {
 	text-decoration: none;
-	color: #DCDCDC;
+	color: black;
 	}
 a:hover {
-	color: white;
+	text-decoration: underline;
 	}
 footer {
-	float: left;
 	display: inline;
 	text-align: center;
 	}
@@ -92,4 +91,7 @@ ul#foot_nav li {
 	}
 #comic_view {
 	border: 2px solid black;
+	}
+#prim_num {
+	font-size: 30px;
 	}
