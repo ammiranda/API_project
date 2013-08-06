@@ -28,7 +28,7 @@ $(document).ready(function() {
  	
  	$('#random_Num').click(function(event){
  	event.preventDefault();
- 	var prime_list = getPrimes(1244);
+ 	var prime_list = getPrimes(1247);
  	var i = Math.floor(Math.random() * prime_list.length);
  	$('#comic_num').remove();
  	$('#comic_view').attr('src', ''); 	
@@ -37,20 +37,24 @@ $(document).ready(function() {
  		url: "http://dynamic.xkcd.com/api-0/jsonp/comic/" + prime_list[i],
  		dataType: 'jsonp',
  		cache: false,
+ 		timeout: 5000,
  		beforeSend: function() {
  			$('#comic_view').hide();
- 			$('#viewer').append('<p id="loading">Loading Comic! Please Standby.</p>');
+ 			$('#viewer').append('<div id="loading_div"><p id="loading">Loading Comic! Please Standby.</p></div>');
  			},
  		complete: function() {
  			$('#loading').remove();
  			},
  		success: function(data, textStatus, jqXHR) {
  			console.log(data);
+ 			$('#loading_div').remove();
  			$('#comic_view').attr('src', data.img);
  			$('#comic_view').show();
  			$('#header').append('<p id="comic_num">Comic Number: <br><span id="prim_num">' + prime_list[i] + '</span></p>');
- 	}
- 		//error: function(data, textStatus, jqXHR) {
+ 	},
+ 		error: function(data, textStatus, jqXHR) {
+ 			$('#comic_view').append('<div id="error_div"><p id="error_msg">Sorry.. something went wrong!  Please click the random button again!"</p></div>');
+ 				
  			
- 		//	}
+ 			}
  	})})});
