@@ -3,10 +3,6 @@
 	margin: 0 auto;
 }
 
-#foot_nav {
-	border: solid 1px black;
-}
-
 #foot_nav li a {
 	text-decoration: none;
 	list-style-type: none;
@@ -16,6 +12,8 @@
 ul {
 	margin: auto;
 	width: 70%;
+	display: inline-block;
+	padding-left: 0;
 }
 
 #viewer {
