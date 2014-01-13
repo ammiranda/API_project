@@ -1,4 +1,38 @@
- 	function getMax(callback) {
+    function getPrimes(max) { //Function to find a set of prime numbers with the max number of the set as the parameter
+        var sieve = [], i, j, primes = [];
+        for (i = 2; i <= max; ++i) {
+            if (!sieve[i]) {
+                // i has not been marked -- it is prime
+                primes.push(i);
+                for (j = i << 1; j <= max; j += i) {
+                    sieve[j] = true;
+                }
+            }
+        }
+        return primes;
+    };
+
+    function loadFirstComic(data) {
+        var biggestNum = data.num;
+        var prime_list = getPrimes(biggestNum);
+    }
+
+    function tester(callback) {
+        $.ajax({
+            url: "http://dynamic.xkcd.com/api-0/jsonp/comic/",
+            dataType: 'jsonp',
+            success: function(data, textStatus, jqXHR) {
+                loadFirstComic(data);
+            }
+        })
+    }
+
+$(document).ready(function() {
+    tester(loadFirstComic);
+});
+
+
+/* 	function getMax(callback) {
         var returned_data = 0;
  		$.ajax({
  			url: "http://dynamic.xkcd.com/api-0/jsonp/comic/",
@@ -68,7 +102,10 @@
 $(document).ready(function() {
  	
  	$('#random_Num').click(function(event){
+
+        getMax(appendImages(m));
+        console.log(m);
         
  });
 
-});
+}); */
