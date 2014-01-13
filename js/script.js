@@ -13,9 +13,35 @@
     };
 
     function loadFirstComic(data) {
-        var biggestNum = data.num;
-        var prime_list = getPrimes(biggestNum);
-    }
+        var prime_list = getPrimes(data.num);
+        var i = Math.floor(Math.random() * prime_list.length);
+        $('#comic_num').remove();
+        $('#comic_view').attr('src', '');   
+        $.ajax({
+            url: "http://dynamic.xkcd.com/api-0/jsonp/comic/" + prime_list[i],
+            dataType: 'jsonp',
+            cache: false,
+            timeout: 5000,
+            beforeSend: function() {
+                $('#comic_view').hide();
+                $('#viewer').append('<div id="loading_div"><p id="loading">Loading Comic! Please Standby.</p></div>');
+                },
+            complete: function() {
+                $('#loading').remove();
+                },
+            success: function(data, textStatus, jqXHR) {
+                console.log(data);
+                console.log(prime_list);
+                $('#loading_div').remove();
+                $('#comic_view').attr('src', data.img);
+                $('#comic_view').show();
+                $('#header').append('<p id="comic_num">Comic Number: <br><span id="prim_num">' + prime_list[i] + '</span></p>');
+                },
+            error: function(data, textStatus, jqXHR) {
+                $('#comic_view').append('<div id="error_div"><p id="error_msg">Sorry.. something went wrong!  Please click the random button again!"</p></div>');
+                }
+          });
+     };
 
     function tester(callback) {
         $.ajax({
@@ -29,6 +55,10 @@
 
 $(document).ready(function() {
     tester(loadFirstComic);
+    $('#random_Num').click(function(event) {
+        event.preventDefault();
+        tester(loadFirstComic);
+    });
 });
 
 
