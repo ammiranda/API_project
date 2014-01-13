@@ -42,7 +42,7 @@ $(document).ready(function() {
  	
  	$('#random_Num').click(function(event){
      	event.preventDefault();
-     	var prime_list = getPrimes(data.num);
+     	var prime_list = getPrimes(1400);
      	var i = Math.floor(Math.random() * prime_list.length);
      	var te;
      	console.log(i);
