@@ -11,14 +11,14 @@
         return primes;
     };
 
-    function loadFirstComic(data) {
+    function loadFirstComic(data) {             // Callback function passed into the tester function on document ready
         var prime_list = getPrimes(data.num);   // Run getPrimes with input of the current comic number which serves as the largest
         var i = Math.floor(Math.random() * prime_list.length);  // Randomly generates the index value given the length of the prime_list array
         $('#comic_num').remove();                               // Removes comic_num div if it exists
         $('#comic_view').attr('src', '');                       // Sets the src property of the comic_view img tag to empty string
         $.ajax({
             url: "http://dynamic.xkcd.com/api-0/jsonp/comic/" + prime_list[i],  // Url used to make the GET request with the prime_list number appended to the end route
-            dataType: 'jsonp',
+            dataType: 'jsonp',                                      // Type of data requested in the AJAX call; valid for cross-domain requests
             cache: false,
             timeout: 5000,                                          // Causes AJAX call to error out if it exceeds five seconds to get a response
             beforeSend: function() {
@@ -29,14 +29,12 @@
                 $('#loading').remove();
                 },
             success: function(data, textStatus, jqXHR) {
-                console.log(data);
-                console.log(prime_list);
-                $('#loading_div').remove();
-                $('#comic_view').attr('src', data.img);
+                $('#loading_div').remove();                         // Removes the loading_div if it exists currently in the DOM
+                $('#comic_view').attr('src', data.img);             // Sets the src attribute of the img tag to match the current comic object
                 $('#comic_view').show();
                 $('#header').append('<p id="comic_num">Comic Number: <br><span id="prim_num">' + prime_list[i] + '</span></p>');
                 },
-            error: function(data, textStatus, jqXHR) {
+            error: function(data, textStatus, jqXHR) {             // Error callback that will be called on failure of GET request
                 $('#comic_view').append('<div id="error_div"><p id="error_msg">Sorry.. something went wrong!  Please click the random button again!"</p></div>');
                 }
           });
@@ -44,10 +42,13 @@
 
     function tester(callback) {
         $.ajax({
-            url: "http://dynamic.xkcd.com/api-0/jsonp/comic/",
+            url: "http://dynamic.xkcd.com/api-0/jsonp/comic/",     // Url doing a GET request on the most recent comic
             dataType: 'jsonp',
             success: function(data, textStatus, jqXHR) {
-                loadFirstComic(data);
+                loadFirstComic(data);                             // Passes the data object received from the AJAX call into loadFirstComic function
+            },
+            error: function(data, textStatus, jqXHR) {
+                $('#comic_view').append('<div id="error_div"><p id="error_msg">Sorry.. something went wrong!  Please click the random button again!"</p></div>');
             }
         })
     }
