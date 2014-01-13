@@ -1,7 +1,23 @@
 #foot_nav li {
 	list-style-type: none;
+	margin: 0 auto;
+}
+
+#foot_nav {
+	border: solid 1px black;
 }
 
 #foot_nav li a {
 	text-decoration: none;
+	list-style-type: none;
+	text-align: center;
+}
+
+ul {
+	margin: 0 auto;
+}
+
+#viewer {
+	height: 100%;
+	width: auto;
 }
