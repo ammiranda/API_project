@@ -14,7 +14,8 @@
 }
 
 ul {
-	margin: 0 auto;
+	margin: auto;
+	width: 70%;
 }
 
 #viewer {
