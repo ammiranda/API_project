@@ -16,7 +16,18 @@ ul {
 	padding-left: 0;
 }
 
+#random_Num {
+	background-color: white;
+	border: 2px solid black;
+}
+
+#random_Num:hover {
+	background-color: black;
+	color: white;
+}
+
 #viewer {
 	height: 100%;
 	width: auto;
+	margin-bottom: 10px;
 }
