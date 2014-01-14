@@ -1,0 +1,1 @@
+An AJAX project that I did as part of the [Thinkful](http://www.thinkful.com/) Front-end Development course.  I make AJAX get requests to the [xkcd API](http://xkcd.com/json.html) to display random comics that are prime numbered.  You can view a live version of this page [here](http://amiranda222.github.io/API_project/).  Enjoy!
